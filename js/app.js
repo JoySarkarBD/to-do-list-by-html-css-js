@@ -39,35 +39,35 @@ function addTask(taskName) {
 
 // take orders from task's button
 
-taskList.addEventListener("click", function (e) {
-  if (e.target.className == "deleted") {
-    deleteTask(e);
+taskList.addEventListener("click", function (event) {
+  if (event.target.className == "deleted") {
+    deleteTask(event);
     // console.log("Task Deleted......");
-  } else if (e.target.className == "completed") {
+  } else if (event.target.className == "completed") {
     completedTask(e);
     // console.log("Task Done......");
-  } else if (e.target.className == "edit") {
-    editTaskName(e);
+  } else if (event.target.className == "edit") {
+    editTaskName(event);
   }
 });
 
 // task delete function
 
-function deleteTask(e) {
-  e.target.parentElement.remove();
+function deleteTask(event) {
+  event.target.parentElement.remove();
 }
 
 // task complect function
 
-function completedTask(e) {
-  const taskName = e.target.parentElement.children[0];
+function completedTask(event) {
+  const taskName = event.target.parentElement.children[0];
   taskName.classList.toggle("completed_task");
 }
 
 // task name edit function
 
-function editTaskName(e) {
-  const taskName = e.target.parentElement.children[0];
+function editTaskName(event) {
+  const taskName = event.target.parentElement.children[0];
   const previousName = taskName.innerText;
   taskName.innerHTML = "";
   const inputNewName = document.createElement("input");
@@ -78,10 +78,10 @@ function editTaskName(e) {
     if (e.key == "Enter") {
       const newTaskName = e.target.value;
       taskName.innerText = newTaskName;
-      e.target.style.display = 'inline';
+      event.target.style.display = 'inline';
     }
   });
 
   taskName.appendChild(inputNewName);
-  e.target.style.display = 'none';
+  event.target.style.display = 'none';
 }
