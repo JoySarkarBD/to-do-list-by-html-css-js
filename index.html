@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>This is the ToDo_List</h1>
+      <!-- task creating area start-->
+      <div class="createTask">
+        <input type="text" id="taskName" placeholder="Add new task.........!" />
+        <button id="addTask">Add task</button>
+      </div>
+      <!-- task creating area start-->
+
+      <!-- display task list area start -->
+      <div class="display_area">
+        <ul id="task_list">
+          <div class="item">
+            <li>Item-1</li>
+            <button class="edit"><i class="fas fa-pen"></i></button>
+            <button class="completed"><i class="fas fa-check"></i></button>
+            <button class="deleted"><i class="fas fa-trash-can"></i></button>
+          </div>
+          <div class="item">
+            <li>Item-2</li>
+            <button class="edit"><i class="fas fa-pen"></i></button>
+            <button class="completed"><i class="fas fa-check"></i></button>
+            <button class="deleted"><i class="fas fa-trash-can"></i></button>
+          </div>
+          <div class="item">
+            <li>Item-3</li>
+            <button class="edit"><i class="fas fa-pen"></i></button>
+            <button class="completed"><i class="fas fa-check"></i></button>
+            <button class="deleted"><i class="fas fa-trash-can"></i></button>
+          </div>
+          <div class="item">
+            <li>Item-4</li>
+            <button class="edit"><i class="fas fa-pen"></i></button>
+            <button class="completed"><i class="fas fa-check"></i></button>
+            <button class="deleted"><i class="fas fa-trash-can"></i></button>
+          </div>
+          <div class="item">
+            <li>Item-5</li>
+            <button class="edit"><i class="fas fa-pen"></i></button>
+            <button class="completed"><i class="fas fa-check"></i></button>
+            <button class="deleted"><i class="fas fa-trash-can"></i></button>
+          </div>
+        </ul>
+      </div>
+      <!-- display task list area end -->
+    </div>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
