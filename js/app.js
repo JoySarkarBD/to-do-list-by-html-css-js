@@ -44,7 +44,7 @@ taskList.addEventListener("click", function (event) {
     deleteTask(event);
     // console.log("Task Deleted......");
   } else if (event.target.className == "completed") {
-    completedTask(e);
+    completedTask(event);
     // console.log("Task Done......");
   } else if (event.target.className == "edit") {
     editTaskName(event);
