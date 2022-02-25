@@ -10,10 +10,20 @@ const taskList = getId("task_list");
 
 //add task to list
 
+// get task name from input field on enter keypress
+newTaskInp.addEventListener("keypress", function (e) {
+  if (e.key == "Enter" && !e.target.value) {
+    alert("Add a task name");
+    return;
+  } else if(e.key == "Enter" && e.target.value){
+    addTask(e.target.value);
+    newTaskInp.value = "";
+  }
+});
+
 // get task name from input field
 addBtn.addEventListener("click", function (e) {
   let taskName = newTaskInp.value;
-
   if (taskName === "") {
     alert("Add a task name");
     return;
