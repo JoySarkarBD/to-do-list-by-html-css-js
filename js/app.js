@@ -28,8 +28,8 @@ addBtn.addEventListener("click", function (e) {
     alert("Add a task name");
     return;
   }
-  newTaskInp.value = "";
   addTask(taskName);
+  newTaskInp.value = "";
 });
 
 // add new task in the task list
@@ -45,12 +45,16 @@ function addTask(taskName) {
 
   // add new task data in local storage
   const data = getDataFromLocalStorage();
-  let uniqData = taskName;
+
+  let newTaskName = taskName;
+
   for (let dataName of data) {
-    if (dataName.trim() === taskName) {
-      uniqData += " ";
+    if (dataName[0].trim() === taskName.trim()) {
+      newTaskName += " ";
     }
   }
+
+  const uniqData = [newTaskName, "Active"];
   data.push(uniqData);
   setDataInLocalStorage(data);
 }
@@ -85,6 +89,21 @@ function deleteTask(event) {
 function completedTask(event) {
   const taskName = event.target.parentElement.children[0];
   taskName.classList.toggle("completed_task");
+  const taskData = getDataFromLocalStorage();
+  let index;
+  taskData.forEach((task, taskIndex) => {
+    if (task[0] == taskName.innerText) {
+      index = taskIndex;
+    }
+  });
+  const task = taskData[index];
+  if (task[1] == "Actcive") {
+    task[1] = "Complect";
+  }else{
+    task[1] == "Actcive"
+  }
+  taskData.splice(index,1,task)
+  setDataInLocalStorage(taskData)
 }
 
 // task name edit function
@@ -102,6 +121,21 @@ function editTaskName(event) {
       const newTaskName = e.target.value;
       taskName.innerText = newTaskName;
       event.target.style.display = "inline";
+
+      const tasksData = getDataFromLocalStorage();
+
+      let index;
+      for (let i = 0; i < tasksData.length; i++) {
+        if (tasksData[i][0].trim() == previousName) {
+          index = i;
+        }
+      }
+
+      let newTaskNameAdded = tasksData[index];
+      newTaskNameAdded.splice(0, 1, newTaskName);
+
+      tasksData.splice(index, 1, newTaskNameAdded);
+      setDataInLocalStorage(tasksData);
     }
   });
 
@@ -133,13 +167,15 @@ function getDataFromLocalStorage() {
 function displayTaskOnUI(data) {
   data.forEach((task) => {
     const item = document.createElement("div");
+    let classOfLi;
     item.className = "item";
-    item.innerHTML = `
-  <li>${task}</li>
+    if (task[1] === "Complect") {
+      classOfLi = "completed_task";
+    }
+    item.innerHTML = `<li class=${classOfLi}>${task[0]}</li>
   <button class="edit"><i class="fas fa-pen"></i></button>
   <button class="completed"><i class="fas fa-check"></i></button>
-  <button class="deleted"><i class="fas fa-trash-can"></i></button>
-`;
+  <button class="deleted"><i class="fas fa-trash-can"></i></button>`;
     taskList.appendChild(item);
   });
 }
@@ -152,9 +188,16 @@ function setDataInLocalStorage(data) {
 
 function deleteDataFromLocalStorage(data) {
   const tasksData = getDataFromLocalStorage();
-  const dataIndex = tasksData.indexOf(data);
+  // const dataIndex = tasksData.indexOf(data);
+
+  let dataIndex;
+  for (let i = 0; i < tasksData.length; i++) {
+    if (tasksData[i][0] == data) {
+      dataIndex = i;
+    }
+  }
+
   tasksData.splice(dataIndex, 1);
   setDataInLocalStorage(tasksData);
 }
 
-// ["Item-1","Item-2","Item-3","Item-4","Item-5"]
