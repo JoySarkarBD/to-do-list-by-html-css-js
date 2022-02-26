@@ -97,10 +97,10 @@ function completedTask(event) {
     }
   });
   const task = taskData[index];
-  if (task[1] == "Actcive") {
+  if (task[1] == "Active") {
     task[1] = "Complect";
   }else{
-    task[1] == "Actcive"
+    task[1] == "Active"
   }
   taskData.splice(index,1,task)
   setDataInLocalStorage(taskData)
