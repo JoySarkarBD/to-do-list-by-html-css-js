@@ -15,7 +15,7 @@ newTaskInp.addEventListener("keypress", function (e) {
   if (e.key == "Enter" && !e.target.value) {
     alert("Add a task name");
     return;
-  } else if(e.key == "Enter" && e.target.value){
+  } else if (e.key == "Enter" && e.target.value) {
     addTask(e.target.value);
     newTaskInp.value = "";
   }
@@ -54,7 +54,7 @@ function addTask(taskName) {
     }
   }
 
-  const uniqData = [newTaskName, "Active"];
+  const uniqData = [newTaskName, "active"];
   data.push(uniqData);
   setDataInLocalStorage(data);
 }
@@ -66,13 +66,10 @@ function addTask(taskName) {
 taskList.addEventListener("click", function (event) {
   if (event.target.className == "deleted") {
     deleteTask(event);
-    // console.log("Task Deleted......");
   } else if (event.target.className == "completed") {
     completedTask(event);
-    // console.log("Task Done......");
   } else if (event.target.className == "edit") {
     editTaskName(event);
-    // console.log("Task Eidted......");
   }
 });
 
@@ -84,7 +81,7 @@ function deleteTask(event) {
   deleteDataFromLocalStorage(taskName);
 }
 
-// task complect function
+// task complete function
 
 function completedTask(event) {
   const taskName = event.target.parentElement.children[0];
@@ -92,18 +89,20 @@ function completedTask(event) {
   const taskData = getDataFromLocalStorage();
   let index;
   taskData.forEach((task, taskIndex) => {
-    if (task[0] == taskName.innerText) {
+    if (task[0].trim() == taskName.innerText) {
       index = taskIndex;
     }
   });
   const task = taskData[index];
-  if (task[1] == "Active") {
-    task[1] = "Complect";
-  }else{
-    task[1] == "Active"
+  console.log(task);
+  if (task[1]== "active") {
+    task[1] = "complete";
+  } else {
+    task[1] = "active";
   }
-  taskData.splice(index,1,task)
-  setDataInLocalStorage(taskData)
+  console.log(task);
+  taskData.splice(index, 1, task);
+  setDataInLocalStorage(taskData);
 }
 
 // task name edit function
@@ -169,8 +168,10 @@ function displayTaskOnUI(data) {
     const item = document.createElement("div");
     let classOfLi;
     item.className = "item";
-    if (task[1] === "Complect") {
+    if (task[1] === "complete") {
       classOfLi = "completed_task";
+    }else{
+      classOfLi = "";
     }
     item.innerHTML = `<li class=${classOfLi}>${task[0]}</li>
   <button class="edit"><i class="fas fa-pen"></i></button>
@@ -188,7 +189,6 @@ function setDataInLocalStorage(data) {
 
 function deleteDataFromLocalStorage(data) {
   const tasksData = getDataFromLocalStorage();
-  // const dataIndex = tasksData.indexOf(data);
 
   let dataIndex;
   for (let i = 0; i < tasksData.length; i++) {
@@ -200,4 +200,3 @@ function deleteDataFromLocalStorage(data) {
   tasksData.splice(dataIndex, 1);
   setDataInLocalStorage(tasksData);
 }
-
